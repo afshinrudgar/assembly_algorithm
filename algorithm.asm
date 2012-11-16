@@ -1,37 +1,9 @@
 ; this file have definition of some macro in assembly language for nasm netwide assembler
-; mecro list:	sort,...
-
-
-; sort can be a template macro
-%macro		sort		3			; array, lenght, and default is lenght of block
-							; that is 4 bytes
-		push	dword	%1
-		push	dword	%2
-		push	dword	%3
-		call		ins_sort
-
-%endmacro
-
-%macro		sortb		2
-
-		sort		%1, %2, 1
-
-%endmacro
-
-%macro		sortw		2
-
-		sort		%1, %2, 2
-
-%endmacro
-
-%macro		sortd		2
-
-		sort		%1, %2, 4
-
-%endmacro
+; mecro list:   sort,...
 
 
 section .text
+; ---------------------> sort
 ins_sort:						; Implementation of Insertion sort
 		pushad
 		mov		ebx, [esp + 44]		; get array address from stack
@@ -122,4 +94,15 @@ exit_bb1:
 done:
 		popad
 		ret 		12
+;\---------------------> sort
 
+
+; ---------------------> max
+find_max:
+                ; To be implemented
+
+
+; ---------------------> min
+
+find_min:
+                ; To be implemented

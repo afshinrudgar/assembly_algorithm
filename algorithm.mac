@@ -1,0 +1,60 @@
+; Macros for some useful algorithm procedures.
+
+%include "algorithm.asm"
+
+
+; sort can be a template macro
+%macro          sort            2-3 4           ; array, lenght, and default is lenght of block
+                                                ; that is 4 bytes
+                push            %1
+                push            %2
+                push            %3
+                call            ins_sort
+
+%endmacro
+
+;sort an array of byte or a string but must be carefull about last zero in string
+;don't count zero in string as second argument
+%macro          sortb           2
+
+                sort            %1, %2, 1
+
+%endmacro
+
+;sort an array of words
+%macro          sortw           2
+
+                sort            %1, %2, 2
+
+%endmacro
+
+;sort an array of double word numbers
+%macro          sortd           2
+
+                sort            %1, %2, 3
+
+%endmacro
+
+%macro          max             2
+
+                pushad
+
+                push            %1
+                push            %2
+                call            find_max
+
+                popad
+
+%endmacro
+
+%macro          min             2
+                
+                pushad
+
+                push            %1
+                push            %2
+                call            find_min
+
+                popad
+
+%endmacro
