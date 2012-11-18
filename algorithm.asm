@@ -69,7 +69,7 @@ while_bb1:
                 jge             while_loop
 
 exit_while_loop:
-        ;change array[edi] with temp that is edx
+                ;change array[edi] with temp that is edx
                 add             edi, ebp        ;awful but I haven't any idea
                 cmp             ebp, 2
                 je              exit_bb2
@@ -110,12 +110,51 @@ done:
 ; ---------------------> max
 find_max:
                 ; To be implemented
+                pushad
+                mov             ebx, [esp + 40]                 ;array address
+                mov             ecx, [esp + 36]                 ;array lenght
+                jecxz           .done
+                dec             ecx
+                mov             eax, [ebx + ecx * 4]
+.get_max:
+                dec             ecx
+                cmp             ecx, 0
+                jnge            .done
+                cmp             eax, [ebx + ecx * 4]
+                jge             .get_max 
+                
+                mov             eax, [ebx + ecx * 4]
+                jmp             .get_max
+.done:
+                mov             [dbuf], eax
 
-
-; ---------------------> min
+                popad
+                ret             8
+                
+;------------------------> min
 
 find_min:
                 ; To be implemented
+                pushad
+                mov             ebx, [esp + 40]                  ;array address
+                mov             ecx, [esp + 36]                  ;array lenght
+                jecxz           .done
+                dec             ecx
+                mov             eax, [ebx + ecx * 4]            ;eax must save minimum value
+.get_min:
+                dec             ecx
+                cmp             ecx, 0 
+                jnge            .done
+                cmp             eax, [ebx + ecx * 4]
+                jle             .get_min
+
+                mov             eax, [ebx + ecx * 4]
+                jmp             .get_min
+.done:
+                mov             [dbuf], eax
+
+                popad
+                ret             8
 
 
 ; ---------------------> power

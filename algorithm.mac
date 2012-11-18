@@ -35,27 +35,21 @@
 
 %endmacro
 
-%macro          max             2
-
-                pushad
+%macro          max             2-3 eax
 
                 push            %1
                 push            %2
                 call            find_max
-
-                popad
+                mov             %3, [dbuf]
 
 %endmacro
 
-%macro          min             2
-                
-                pushad
+%macro          min             2-3 eax
 
                 push            %1
                 push            %2
                 call            find_min
-
-                popad
+                mov             %3, [dbuf]
 
 %endmacro
 
