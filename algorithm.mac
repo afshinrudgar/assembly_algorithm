@@ -60,7 +60,5 @@
                 call            power_
                 mov             %3, [dbuf]
 
-                add             esp, 8
-
 %endmacro
 

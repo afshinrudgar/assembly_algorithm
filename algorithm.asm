@@ -162,27 +162,16 @@ find_min:
 power_:
                 pushad
 
-                mov             edx, [esp + 36]
                 mov             ebx, [esp + 40]
-                mov             eax, 0
-                mov             edi, ebx
+                mov             ecx, [esp + 36]
+                mov             eax, 1
+                jecxz           .done
 
 .for_loop:
-                dec             edx
-                cmp             edx, 0
-                jng             .end_for_loop
-
-                mov             ecx, edi
-                mov             eax, 0
-
-.internal_for_loop:
-                add             eax, ebx
-                loop            .internal_for_loop
-
-                mov             ebx, eax
-                jmp             .for_loop
-
-.end_for_loop:
+                imul            eax, ebx
+                loop            .for_loop
+                
+.done:
                 mov             [dbuf], eax
 
                 popad
